@@ -55,12 +55,13 @@ test.describe('Todo List', () => {
             await todoPage.clickAddBtn();
         });
 
-        await test.step('2-3.', async() => {
+        await test.step('2. Validate that the new task appears in the task list.', async() => {
             
-            //Validate that the new task appears in the task list.
             await expect(todoPage.taskList).toBeVisible();
+        });
 
-            //Validate that the number of tasks in the list is exactly one.
+        await test.step('3. Validate that the number of tasks in the list is exactly one.', async() => {
+
             await expect(todoPage.taskList).toHaveCount(1);
         });
 
@@ -143,18 +144,23 @@ test.describe('Todo List', () => {
 
         });
 
-        await test.step('3-4-5', async() => {
+        await test.step('3. Enter the complete name of the previously added to-do item into the search bar', async() => {
 
-            // 3. Enter the complete name of the previously added to-do item into the search bar
             await todoPage.fillSearchBar(tasks[0])
+        });
 
-            // 4. Validate that the list is now filtered to show only the item you searched for.
+        await test.step('4. Validate that the list is now filtered to show only the item you searched for.', async() => {
+            
             await expect(todoPage.taskList).toHaveText(tasks[0]);
 
-            // 5. Validate that the number of tasks visible in the list is exactly one.
+        });
+            
+        await test.step('5. Validate that the number of tasks visible in the list is exactly one.', async() => {
+            
             await expect(todoPage.taskList).toHaveCount(1);
 
         });
+
     });
 
     test('Test Case 05 - Task Validation and Error Handling', async({page}) => {
