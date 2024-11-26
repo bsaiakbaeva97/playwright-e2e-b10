@@ -18,7 +18,7 @@ test.describe('Todo List', () => {
     const errorMessage1 = 'Error: Todo cannot be more than 30 characters!';
     const errorMessage2 = `Error: You already have ${tasks[0]} in your todo list.`
 
-    test('Test Case 01 - Todo-App Modal Verification', async ({page}) => {
+    test('Test Case 01 - Todo-App Modal Verification', async () => {
 
         await test.step('1. Confirm that the todo-app modal is visible with the title “My Tasks.”', async() => { 
 
@@ -46,7 +46,7 @@ test.describe('Todo List', () => {
        });    
     });
 
-    test('Test Case 02 - Single Task Addition and Removal', async({page}) => {
+    test('Test Case 02 - Single Task Addition and Removal', async() => {
 
         await test.step('1. Enter a new task in the todo input field and add it to the list.', async() => {
             
@@ -90,7 +90,7 @@ test.describe('Todo List', () => {
         
     });
 
-    test('Test Case 03 - Multiple Task Operations', async({page}) => {
+    test('Test Case 03 - Multiple Task Operations', async() => {
 
         await test.step('1. Enter and add 5 to-do items individually.', async() => {
 
@@ -127,7 +127,7 @@ test.describe('Todo List', () => {
 
      });
 
-    test('Test Case 04 - Search and Filter Functionality in todo App', async({page}) => {
+    test('Test Case 04 - Search and Filter Functionality in todo App', async() => {
 
         await test.step('1. Enter and add 5 to-do items individually.', async() => {
         
@@ -163,7 +163,7 @@ test.describe('Todo List', () => {
 
     });
 
-    test('Test Case 05 - Task Validation and Error Handling', async({page}) => {
+    test('Test Case 05 - Task Validation and Error Handling', async() => {
 
         await test.step('1. Attempt to add an empty task to the to-do list.', async() => {
 

@@ -1,32 +1,35 @@
 import { expect, test } from "@playwright/test";
-import { clickLink } from "../../helpers/clickHelpers";
 import { LoginPage } from "../page/LoginPage";
+
 
 test.describe("Login", { tag: "@regression" }, () => {
 
   let loginPage: LoginPage
   
   test.beforeEach(async ({ page }) => {
+
     loginPage = new LoginPage(page)
     await page.goto("/frontend/project-2");
+
   });
 
-  test('Test Positive', async({ page }) => {
-    await loginPage.userLogin(process.env.USER_NAME!, process.env.USER_PASSWORD!)
-    await expect(loginPage.loginMesage).toHaveText('You are logged in')
-  })
+  const successMessage = 'You are logged in';
+  const errorMessage = 'Invalid Username entered!';
+  const invalidUsername = 'error';
+  const invalidPassword = 'error';
 
-  test('Test Negative', async({ page }) => {
-    
-    const username = page.locator('#username')
-    const password = page.locator('#password')
+  test('Test Positive', async() => {
 
-    await username.fill('error')
-    await password.fill('error')
+    await loginPage.userLogin(process.env.USER_NAME!, process.env.USER_PASSWORD!);
+    await expect(loginPage.loginMesage).toHaveText(successMessage);
 
-    await page.click('#login_btn')
+  });
 
+  test('Test Negative', async() => {
+ 
+    await loginPage.userLogin(invalidUsername, invalidPassword);
+    await loginPage.clickLoginButton();
+    await expect(loginPage.errorMessage).toHaveText(errorMessage);
 
-    await expect(page.locator('#error_message')).toHaveText('Invalid Username entered!')
-  })
-})
+  });
+});
