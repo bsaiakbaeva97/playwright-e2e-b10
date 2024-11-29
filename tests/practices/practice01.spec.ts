@@ -80,7 +80,6 @@ test.describe('Practice04 GitHub HomePage', () => {
 
     });
 
-
     test('TASK-4: Validate the GitHub Login Page Footer Links', async({ gitHubLoginPage }) => {
 
         await test.step('1. Validate that there are 6 links are displayed in the footer', async() => {
