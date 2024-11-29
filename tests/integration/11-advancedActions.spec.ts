@@ -65,12 +65,3 @@ test.describe("Advanced user Actions", { tag: "@regression" }, () => {
     await page.keyboard.press('Backspace')
   })
 })
-
-
-
-
-
-
-
-
-

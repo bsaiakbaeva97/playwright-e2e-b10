@@ -1,37 +1,66 @@
-import { expect, test } from "@playwright/test";
-import { clickLink } from "../../helpers/clickHelpers";
+import { test } from "@playwright/test";
+import { clickButton, clickLink } from "../../helpers/clickHelpers";
 
-test("Homework", async ({ page }) => {
+test.describe("Dialogs", { tag: "@regression" }, () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("https://www.techglobal-training.com/frontend");
+    await clickLink(page, "Alerts");
+  });
 
-    // Click on the "Apple" link and validate URL contains "Apple"
-    await clickLink(page, 'Apple');
+  test("Handling Dialogs", async ({ page }) => {
 
-    const appleTab = await page.waitForEvent('popup');
+    // page.on('dialog', async (dialog) => {
+    //   const type = dialog.type()
+    //   const message = dialog.message()
 
-    const appleURL = appleTab.url();
-    console.log(appleURL);
-    expect(appleURL).toContain('apple');
+    //   await dialog.accept()
 
-    //Click on the "Microsoft" link and validate URL contains "Microsoft"
-    const [microsoftTab] = await Promise.all([
-        page.waitForEvent('popup'),
-        clickLink(page, 'Microsoft')
-    ]);
-
-    const microsoftURL = microsoftTab.url();
-    expect(microsoftURL).toContain('microsoft');
-
-    //Click on the "Tesla" link and validate URL contains "Tesla"
-    await clickLink(page, 'Tesla');
-
-    const teslaTab = await page.waitForEvent('popup');
-  
-    const teslaURL = teslaTab.url();
- 
-    expect(teslaURL).toContain('tesla')
+    //   console.log(`Type of alert: ${type}`)
+    //   console.log(`Message of alert: ${message}`)
+    // })
     
+    // page.on('dialog', async (dialog) => {
+    //   const type = dialog.type()
+    //   const message = dialog.message()
+
+    //   if(type === 'alert') {
+    //     await dialog.accept()
+    //   } else if(type === 'confirm') {
+    //     await dialog.dismiss()
+    //   } else {
+    //     await dialog.accept('My Message')
+    //   }
+    // })
+
+
+    page.once('dialog', async (dialog) => {
+      const type = dialog.type()
+      const message = dialog.message()
+
+      await dialog.accept()
+
+      console.log(`Type of alert: ${type}`)
+      console.log(`Message of alert: ${message}`)
+    })
+
+
+    await clickButton(page, 'Warning alert')
+
+    page.once('dialog', async (dialog) => {
+      const type = dialog.type()
+      const message = dialog.message()
+
+      await dialog.accept()
+
+      console.log(`Type of alert: ${type}`)
+      console.log(`Message of alert: ${message}`)
+    })
+
+    await clickButton(page, 'Confirmation alert')
+    await clickButton(page, 'Prompt alert')
 
   })
+})
 
 
 

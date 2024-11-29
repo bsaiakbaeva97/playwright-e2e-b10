@@ -1,6 +1,6 @@
 
 import {test, expect, Locator} from "@playwright/test";
-import { TodoPage } from "../page/ToDoPage";
+import { TodoPage } from "../../page/TodoPage";
 
 
 test.describe('Todo List', () => {

@@ -84,14 +84,17 @@ test.describe("Interacting Multiple Tabs", { tag: "@regression" }, () => {
     const microsoftURL = microsoftTab.url();
     expect(microsoftURL).toContain('microsoft');
 
-    //Click on the "Tesla" link and validate URL contains "Tesla"
-    await clickLink(page, 'Tesla');
+    const links = ["Apple", "Microsoft"];
+    for (const link of links) {
+      const [newTab] = await Promise.all([
+        page.waitForEvent("popup"),
+        clickLink(page, link),
+      ]);
 
-    const teslaTab = await page.waitForEvent('popup');
-  
-    const teslaURL = teslaTab.url();
-    console.log(teslaURL);
-    expect(teslaURL).toContain('tesla');
+      expect(newTab.url()).toContain(link.toLowerCase());
+
+      await newTab.close()
+    }
 
   })
 
