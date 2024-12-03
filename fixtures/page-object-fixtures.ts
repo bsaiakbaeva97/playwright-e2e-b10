@@ -2,11 +2,13 @@ import { test as base } from "@playwright/test";
 import { LoginPage } from "../page/LoginPage";
 import { BasePage } from "../page/BasePage";
 import { TodoListPage } from "../page/TodoListPage";
+import { WaitsPage } from "../page/WaitsPage";
 
 type MyFixtures = { 
   basePage: BasePage
   todoPage: TodoListPage,
-  loginPage: LoginPage
+  loginPage: LoginPage,
+  waitsPage: WaitsPage,
 };
 
 // Extend the Playwright test runner to create your custom fixtures
@@ -24,6 +26,13 @@ export const test = base.extend<MyFixtures>({
     const todoPage = new TodoListPage(page)
     await use(todoPage)
   },
+
+  waitsPage: async({page}, use) => {
+    const waitsPage = new WaitsPage(page)
+    await use(waitsPage)
+  },
+
+
 })
 
 export { expect } from '@playwright/test'

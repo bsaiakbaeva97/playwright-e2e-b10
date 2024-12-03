@@ -102,7 +102,7 @@ test.describe('Practice04 GitHub HomePage', () => {
 
         });
 
-    })
+    });
 
     test('TASK-5: Validate the GitHub Login Page Invalid Login Attempt', async({ gitHubLoginPage }) => {
 
