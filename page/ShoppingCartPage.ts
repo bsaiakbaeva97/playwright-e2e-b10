@@ -14,21 +14,29 @@ export class ShoppingCartPage extends BasePage {
   readonly cartItems: Locator;
   readonly totalPrice: Locator;
   readonly placeOrder: Locator;
+  readonly cartItemImg: Locator;
+  readonly cartItemName: Locator;
+  readonly cartItemDiscount: Locator;
+  readonly successMsg: Locator;
 
   constructor(page: Page) {
     super(page);
     this.heading = page.locator('.mt-2');
     this.courseSections = page.locator('[id^= course]');
-    this.courseImg = page.locator('[id^= course] img');
-    this.courseName = page.locator('[id^= course] h3');
-    this.courseTag = page.locator('[id^= course] .my-3');
-    this.coursePrice = page.locator('[id^= course] strong');
+    this.courseImg = this.courseSections.locator('img');
+    this.courseName = this.courseSections.locator('h3');
+    this.courseTag = this.courseSections.locator('.my-3');
+    this.coursePrice = this.courseSections.locator('strong');
     this.coursesWithDiscount = page.locator('[data-testid="discount"]');
-    this.addToCartBtn = page.locator('[id^= course] button');
+    this.addToCartBtn = this.courseSections.locator('button');
     this.cartHeading = page.locator('.mb-2');
     this.cartItems = page.locator('.course-card');
     this.totalPrice = page.locator('#total-price');
-    this.placeOrder = page.locator('.Project8_cardBottom__sN8en button')
+    this.placeOrder = page.locator('.Project8_cardBottom__sN8en button');
+    this.cartItemImg = this.cartItems.locator('img');
+    this.cartItemName = this.cartItems.locator('has-text-black');
+    this.cartItemDiscount = this.cartItems.locator('[data-testid="discount"]');
+    this.successMsg = page.locator('.is-success');
   }
 
   async goto() {
@@ -51,7 +59,22 @@ export class ShoppingCartPage extends BasePage {
     return await this.coursesWithDiscount.all()
   }
 
-  async AddToCartBtnArr() {
+  async addToCartBtnArr() {
     return await this.addToCartBtn.all()
   }
+
+  async addCourseAndGetCourse(index) {
+    const courseToAdd = this.addToCartBtn.nth(index)
+    await courseToAdd.click();
+    return courseToAdd;
+  }
+
+  async extractNumFromText(locator: Locator) {
+     const textContent = await locator.textContent();
+     const numericValue = textContent?.replace(/^d+/, '');
+     return Number(numericValue);
+  }
+
+  
+  
 }
