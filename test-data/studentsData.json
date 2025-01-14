@@ -1,0 +1,16 @@
+{
+    "newStudent": {
+        "DOB": "1990-01-01",
+        "EMAIL": "bermet@gmail.com",
+        "FIRST_NAME": "Bermet",
+        "LAST_NAME": "Saiakbaeva",
+        "INSTRUCTOR_ID": 2
+    },
+    "updateStudent": {
+        "DOB": "1990-01-01",
+        "EMAIL": "bermet@gmail.com",
+        "FIRST_NAME": "Bermet",
+        "LAST_NAME": "Saiakbaeva",
+        "INSTRUCTOR_ID": 1
+    }
+}

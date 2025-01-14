@@ -155,7 +155,7 @@ test.describe('Shopping Cart', () => {
             for(let i = 0; i < 2; i++) {
 
                 const coursePriceNum = await shoppingCartPage.extractNumFromText(shoppingCartPage.coursePrice);
-                const discountPercentageNum = await shoppingCartPage.extractNumFromText(shoppingCartPage.coursesWithDiscount)
+                const discountPercentageNum = await shoppingCartPage.extractNumFromText(shoppingCartPage.cartItemDiscount)
                 const discountedPrice = coursePriceNum - (coursePriceNum * (discountPercentageNum / 100))    
                 
                 totalDiscountedPrice += discountedPrice;
